@@ -7,8 +7,8 @@ const MAX_ROWS = 20;
 const MAX_COLS = 30;
 
 export const App = () => {
-  const [x, setX] = useState<string | undefined>("28");
-  const [y, setY] = useState<string | undefined>("18");
+  const [x, setX] = useState<string | undefined>();
+  const [y, setY] = useState<string | undefined>();
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -37,7 +37,6 @@ export const App = () => {
                 <label>Columns</label>
                 <input
                   type="number"
-                  defaultValue={"28"}
                   min={0}
                   max={30}
                   name="columns"
@@ -49,7 +48,6 @@ export const App = () => {
                 <label>Rows</label>
                 <input
                   type="number"
-                  defaultValue={"18"}
                   min={0}
                   max={20}
                   name="rows"
