@@ -1,0 +1,17 @@
+{
+  "include": ["./src", "src/lib"],
+  "exclude": [""],
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "es2016",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir":"./dist",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": false,
+    "strict": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node"
+  }
+}
