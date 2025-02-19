@@ -6,21 +6,27 @@ const background_image = require("./lib/decoration.png");
 const MAX_ROWS = 20;
 const MAX_COLS = 30;
 
+const isDecimal = (number?: string) => {
+  return number?.includes(",") || number?.includes(".");
+};
+
 export const App = () => {
   const [x, setX] = useState<string | undefined>();
   const [y, setY] = useState<string | undefined>();
   const ref = useRef<HTMLDivElement | null>(null);
 
+  const isInvalidMaxValue = Number(y) > MAX_COLS || Number(x) > MAX_ROWS;
+  const isInvalidDecimalValue = isDecimal(y) || isDecimal(x);
+
   useEffect(() => {
     const gridContainer = ref.current;
     if (!gridContainer) return;
 
-    if (Number(y) > MAX_COLS || Number(x) > MAX_ROWS) return;
+    if (isInvalidMaxValue) return;
+    if (isInvalidDecimalValue) return;
 
     handleCreateGrid(x, y, gridContainer);
   }, [x, y]);
-
-  const isInvalidValue = Number(y) > MAX_COLS || Number(x) > MAX_ROWS;
 
   return (
     <>
@@ -54,11 +60,14 @@ export const App = () => {
                   onChange={(e) => setX(e.target.value)}></input>
               </div>
             </div>
-            {isInvalidValue && (
+            {isInvalidMaxValue && (
               <p className="validation-hint">
                 Please enter an equal or lower value than 30 for columns and 20
                 for rows
               </p>
+            )}
+            {isInvalidDecimalValue && (
+              <p className="validation-hint">Please enter a round number</p>
             )}
           </div>
         </header>
